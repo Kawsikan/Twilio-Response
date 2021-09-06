@@ -19,8 +19,8 @@ public class TwimlResponseController {
     public String respondToPhoneCall() {
 
         VoiceResponse.Builder voiceBuilder = new VoiceResponse.Builder();
-        Say greeting = new Say.Builder("Hello Caller this is working").voice(Say.Voice.ALICE).build();
-        Play music = new Play.Builder("https://demo.twilio.com/docs/classic.mp3").build();
+        Say greeting = new Say.Builder("Hello Caller this is working.").voice(Say.Voice.ALICE).build();
+        Play music = new Play.Builder("http://demo.twilio.com/docs/classic.mp3").build();
         return voiceBuilder.say(greeting).play(music).build().toXml();
 
     }
