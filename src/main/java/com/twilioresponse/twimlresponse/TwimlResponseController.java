@@ -38,15 +38,15 @@ public class TwimlResponseController {
 
     }
 
-    @PostMapping("/gather")
+    @PostMapping("/input")
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         TwiML twiml = new VoiceResponse.Builder()
-                .gather(
-                        new Gather.Builder()
-                                .numDigits(1)
-                                .say(new Say.Builder("For sales, press 1. For support, press 2.").build())
-                                .build()
+                .gather(new Gather.Builder()
+                        .numDigits(1)
+                        .action("https://twilio-callback-url.herokuapp.com/gather")
+                        .say(new Say.Builder("For approve, press 1. For reject, press 2.").build())
+                        .build()
                 )
                 .redirect(new Redirect.Builder("/voice").build())
                 .build();
@@ -59,13 +59,5 @@ public class TwimlResponseController {
         }
     }
 
-    private static void appendGather(VoiceResponse.Builder builder) {
-        builder.gather(new Gather.Builder()
-                .numDigits(1)
-                .say(new Say.Builder("For sales, press 1. For support, press 2.").build())
-                .build()
-        )
-                .redirect(new Redirect.Builder("/voice").build());
-    }
 
 }
