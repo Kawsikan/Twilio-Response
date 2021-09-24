@@ -42,15 +42,17 @@ public class CallServiceImpl implements CallService {
             String mobileNumber = callModel.getMobileNumber();
 
             Call call = Call.creator(
-                            new com.twilio.type.PhoneNumber(mobileNumber),
-                            new com.twilio.type.PhoneNumber(twilioSenderNumber),
-                            new URI("http://3cb1-2402-4000-2281-e6cf-dcaf-9390-5a8c-b9cc.ngrok.io/initiate-voice"))
+                    new com.twilio.type.PhoneNumber(mobileNumber),
+                    new com.twilio.type.PhoneNumber(twilioSenderNumber),
+                    new URI("https://spring-boot-twilio.herokuapp.com/twilio/initiate-voice"))
                     .create();
 
             logger.info("Call initiated Successfully to the number " + mobileNumber);
 
-            return "Call initiated Successfully with " + " sid : " + call.getSid() +
-                    "\nAccount sid " + call.getAccountSid() + "\nParent sid " + call.getParentCallSid()
+            return "Call initiated Successfully with "
+                    + " sid : " + call.getSid() +
+                    "\nAccount sid " + call.getAccountSid()
+                    + "\nParent sid " + call.getParentCallSid()
                     + "\ngetTo " + call.getTo();
 
         } catch (Exception e) {
@@ -64,7 +66,7 @@ public class CallServiceImpl implements CallService {
         TwiML twiml = new VoiceResponse.Builder()
                 .gather(new Gather.Builder()
                         .numDigits(1)
-                        .action("http://7299-2402-4000-2181-f0da-a4c4-75d1-ace1-c497.ngrok.io/gather")
+                        .action("https://spring-boot-twilio.herokuapp.com/twilio/gather")
                         .say(new Say.Builder("For approve, press 1. For reject, press 2.").build())
                         .build()
                 )
