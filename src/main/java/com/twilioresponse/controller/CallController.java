@@ -3,10 +3,7 @@ package com.twilioresponse.controller;
 import com.twilioresponse.model.CallModel;
 import com.twilioresponse.service.CallService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +18,11 @@ public class CallController {
 
     public CallController(CallService callService) {
         this.callService = callService;
+    }
+
+    @GetMapping
+    public String welcome() {
+        return "Welcome !";
     }
 
     @PostMapping("/call")
